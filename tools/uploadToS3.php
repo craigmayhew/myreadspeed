@@ -3,8 +3,8 @@
 require '../vendor/autoload.php';
 use Aws\Common\Aws;
 
-$dir = '/home/craig/gitrepos/mine/craig.mayhew.io/htdocs';
-$bucket = 'craig.mayhew.io';
+$dir = '/home/craig/gitrepos/mine/myreadspeed.com/htdocs';
+$bucket = 'www.myreadspeed.com';
 $keyPrefix = '';
 $options = array(
   'params'      => array('ACL' => 'public-read'),
