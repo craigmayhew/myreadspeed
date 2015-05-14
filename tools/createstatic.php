@@ -5,9 +5,9 @@ class builder{
   /*CONFIG START*/
   private $destinationFolder = '../htdocs/';
   private $dirPages  = '../pages/';
-  private $cssPath   = '../s.css';
+  private $cssPath   = '../c.css';
   private $css       = '';
-  private $justCopy  = array('favicon.ico','files','imgs','js','robots.txt','uploads');
+  private $justCopy  = array('favicon.ico','images','robots.txt');
   private $sideNav   = '';
   /*CONFIG END*/
 
@@ -32,8 +32,6 @@ class builder{
     $this->css = file_get_contents($this->cssPath);
     echo "Copying Static Files\n";
     $this->copyStaticFiles();
-    echo "Building Blog\n";
-    $this->buildBlog();
     echo "Building Pages\n";
     $this->buildPages($this->dirPages);
   }
@@ -116,7 +114,8 @@ class page{
   }
   private function buildFooter(){
     $this->footer =
-    '<div id="footer-wrp">
+    '<div id="footer">
+      <div id="footer-wrp">
         <div id="footer-left">
             <span class="domain">myReadSpeed<span>.com</span></span>
             <p>
