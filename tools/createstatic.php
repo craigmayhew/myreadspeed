@@ -7,7 +7,7 @@ class builder{
   private $dirPages  = '../pages/';
   private $cssPath   = '../c.css';
   private $css       = '';
-  private $justCopy  = array('favicon.ico','images','robots.txt');
+  private $justCopy  = array('favicon.ico','images','j.js','robots.txt');
   private $sideNav   = '';
   /*CONFIG END*/
 
