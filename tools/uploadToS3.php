@@ -3,7 +3,7 @@
 require '../vendor/autoload.php';
 use Aws\Common\Aws;
 
-$dir = '/home/craig/gitrepos/mine/myreadspeed.com/htdocs';
+$dir = '/mnt/c/Users/day2day/Documents/GitHub/myreadspeed.com/htdocs';
 $bucket = 'www.myreadspeed.com';
 $keyPrefix = '';
 $options = array(
