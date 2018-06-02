@@ -5,9 +5,7 @@ class builder{
   /*CONFIG START*/
   private $destinationFolder = '../htdocs/';
   private $dirPages  = '../pages/';
-  private $cssPath   = '../c.css';
-  private $css       = '';
-  private $justCopy  = array('favicon.ico','images','j.js','robots.txt');
+  private $justCopy  = array('favicon.ico','images','c.css','j.js','robots.txt');
   private $sideNav   = '';
   /*CONFIG END*/
 
@@ -29,7 +27,6 @@ class builder{
   }
 
   public function build(){
-    $this->css = file_get_contents($this->cssPath);
     echo "Copying Static Files\n";
     $this->copyStaticFiles();
     echo "Building Pages\n";
@@ -57,7 +54,7 @@ class builder{
         }
         if(substr($entry,-5) != '.json'){continue;}
         $json = json_decode(file_get_contents($dir.$entry),true);
-        $page = new page($json['title'],$this->css);
+        $page = new page($json['title']);
         $page->setContent(file_get_contents(substr($dir.$entry,0,-5).'.html'));
         $page->setSideNav($this->sideNav);
         $content = $page->build();
@@ -81,7 +78,7 @@ class page{
   private $navTop   = '';
   public  $navRight = '';
   private $title    = '';
-  function __construct($title,$css=''){
+  function __construct($title){
     $this->title = $title;
 
     $this->header =
@@ -120,11 +117,6 @@ class page{
             <span class="domain">myReadSpeed<span>.com</span></span>
             <p>
             Calculate your reading speed and see how quick and easy it is to read more books at your normal reading pace - you can also schedule free custom installments to read any classic book by email
-            <br />
-            <font class="who">
-            Designed by Chung Nguyen-Le and built by <a href="http://www.adire.co.uk" target="_blank">Adire</a>  
-            to encourage more people to read and more people to write - Copyright 2009. All rights reserved.
-            </font>
             </p>
         </div>
         <div id="footer-right">
@@ -137,17 +129,6 @@ class page{
         <div class="clear"></div>
     </div>
 </div>
-
-<script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src=\'" + gaJsHost + "google-analytics.com/ga.js\' type=\'text/javascript\'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-8317546-4");
-pageTracker._trackPageview();
-} catch(err) {}
-</script>
 </body>';
   }
   public function setContent($content){
