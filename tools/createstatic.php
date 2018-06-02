@@ -56,6 +56,7 @@ class builder{
         $json = json_decode(file_get_contents($dir.$entry),true);
         $page = new page($json['title']);
         $page->setContent(file_get_contents(substr($dir.$entry,0,-5).'.html'));
+        $page->overwritePlaceHolders();
         $page->setSideNav($this->sideNav);
         $content = $page->build();
         $this->generateFile($this->destinationFolder.$json['url'].'/index.html',$content);
@@ -111,7 +112,12 @@ class page{
   }
   private function buildFooter(){
     $this->footer =
-    '<div id="footer">
+                '<div id="fix-footer"></div>'.
+            '</div>'.
+            '<div class="clear"></div>'.
+        '</div>'.
+
+      '<div id="footer">
       <div id="footer-wrp">
         <div id="footer-left">
             <span class="domain">myReadSpeed<span>.com</span></span>
@@ -133,6 +139,18 @@ class page{
   }
   public function setContent($content){
     $this->content = $content;
+  }
+  public function overwritePlaceHolders(){
+      $ads =
+          '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'.
+          '<ins class="adsbygoogle"'.
+          ' style="display:block"'.
+          ' data-ad-format="autorelaxed"'.
+          ' data-ad-client="ca-pub-9286138628337172"'.
+          ' data-ad-slot="6814228168"></ins>'.
+          '<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
+      $this->content = str_replace('ADVERTISEMENTPLACEHOLDER', $ads , $this->content);
+      return true;
   }
   public function setSideNav($nav){
     $this->navRight = $nav;
